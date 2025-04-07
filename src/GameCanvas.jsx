@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { resources } from "./Resource.js"
 import { Sprite } from "./Sprite.js";
 import { Vector2 } from "./vector2.js";
+import { GameLoop } from "./GameLoop.js";
 
 const GameCanvas = () => {
     const canvasRef = useRef(null);
@@ -25,20 +26,34 @@ const GameCanvas = () => {
             frameSize: new Vector2(32, 32),
             hFrames: 3,
             vFrames: 8,
-            frame: 4
+            frame: 1
         })
 
-        const heroPos = new Vector2(16* 5, 16 * 5);        
+        const shadow = new Sprite({
+            resource: resources.images.shadow,
+            frameSize: new Vector2(32,32)
+        })
+
+        const heroPos = new Vector2(16* 6, 16 * 5);        
+
+        const update = () => {
+            // updating shit in the game.
+            hero.frame += 1;
+        }
 
         const draw = () => {
             skySprite.drawImage(ctx, 0, 0);
             groundSprite.drawImage(ctx, 0, 0);
-            hero.drawImage(ctx, heroPos.x, heroPos.y);
-        }
 
-        setInterval(() => {
-            draw();
-        }, 300)
+            const heroOffset = new Vector2(-8,-21);
+            const heroPosX = heroPos.x + heroOffset.x;
+            const heroPosY = heroPos.y+1 + heroOffset.y;
+            shadow.drawImage(ctx, heroPosX, heroPosY)
+            hero.drawImage(ctx, heroPosX, heroPosY);
+        }
+        
+        const gameLoop = new GameLoop(update, draw);
+        gameLoop.start(); 
     }, []);
 
     return (
