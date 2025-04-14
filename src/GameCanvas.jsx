@@ -4,8 +4,12 @@ import { Sprite } from "./Sprite.js";
 import { Vector2 } from "./vector2.js";
 import { GameLoop } from "./GameLoop.js";
 import { DOWN, Input, LEFT, RIGHT, UP } from "./Input.js";
-import { grindCells } from "./helpers/Grid.js";
+import { grindCells, isSpaceFree } from "./helpers/Grid.js";
 import { moveTowards } from "./helpers/moveTowards.js";
+import { walls } from "./levels/level1.js";
+import { Animations } from "./Animations.js";
+import { FrameIndexPattern } from "./FrameIndexPattern.js";
+import { STAND_DOWN, STAND_LEFT, STAND_RIGHT, STAND_UP, WALK_DOWN, WALK_LEFT, WALK_RIGHT, WALK_UP } from "./objects/Hero/heroAnimations.js";
 
 const GameCanvas = () => {
     const canvasRef = useRef(null);
@@ -30,11 +34,21 @@ const GameCanvas = () => {
             hFrames: 3,
             vFrames: 8,
             frame: 1,
-            position: new Vector2(grindCells(6), grindCells(5))
+            position: new Vector2(grindCells(6), grindCells(5)),
+            animations: new Animations({
+                walkDown: new FrameIndexPattern(WALK_DOWN),
+                walkUp: new FrameIndexPattern(WALK_UP),
+                walkLeft: new FrameIndexPattern(WALK_LEFT),
+                walkRight: new FrameIndexPattern(WALK_RIGHT),
+                standDown: new FrameIndexPattern(STAND_DOWN),
+                standUp: new FrameIndexPattern(STAND_UP),
+                standLeft: new FrameIndexPattern(STAND_LEFT),
+                standRight: new FrameIndexPattern(STAND_RIGHT),
+            })
         })
 
         const heroDestinationPosition = hero.position.duplicate();
-
+        let heroFacing = DOWN;
         const shadow = new Sprite({
             resource: resources.images.shadow,
             frameSize: new Vector2(32, 32)
@@ -42,18 +56,26 @@ const GameCanvas = () => {
 
         const input = new Input();
 
-        const update = () => {
+        const update = (delta) => {
 
             const distance = moveTowards(hero, heroDestinationPosition, 1);
 
             const hasArrived = distance <= 1;
-            if(hasArrived) {
+            if (hasArrived) {
                 tryMove();
             }
+
+            // work on hero animations
+            hero.step(delta);
         }
 
         const tryMove = () => {
-            if(!input.direction) {
+            if (!input.direction) {
+                if (heroFacing === LEFT) { hero.animations.play("standLeft") }
+                if (heroFacing === RIGHT) { hero.animations.play("standRight") }
+                if (heroFacing === UP) { hero.animations.play("standUp") }
+                if (heroFacing === DOWN) { hero.animations.play("standDown") }
+
                 return;
             }
 
@@ -63,24 +85,29 @@ const GameCanvas = () => {
 
             if (input.direction === DOWN) {
                 nextY += gridSize;
-                hero.frame = 0;
+                hero.animations.play("walkDown");
             }
             if (input.direction === UP) {
                 nextY -= gridSize;
-                hero.frame = 6;
+                hero.animations.play("walkUp");
             }
             if (input.direction === LEFT) {
                 nextX -= gridSize;
-                hero.frame = 9;
+                hero.animations.play("walkLeft");
             }
             if (input.direction === RIGHT) {
                 nextX += gridSize;
-                hero.frame = 3;
+                hero.animations.play("walkRight");
             }
 
+            heroFacing = input.direction ?? heroFacing;
+
             // check if space is free for collosion protection
-            heroDestinationPosition.x = nextX;
-            heroDestinationPosition.y = nextY;
+            if (isSpaceFree(walls, nextX, nextY)) {
+                heroDestinationPosition.x = nextX;
+                heroDestinationPosition.y = nextY;
+            }
+
         }
 
         const draw = () => {
