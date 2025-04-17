@@ -9,6 +9,7 @@ import { moveTowards } from "./helpers/moveTowards.js";
 import { GameObject } from "./GameObject.js";
 import { Hero } from "./objects/Hero/hero.js";
 import { events } from "./Events.js";
+import { Camera } from "./Camera.js";
 
 const GameCanvas = () => {
     const canvasRef = useRef(null);
@@ -33,7 +34,8 @@ const GameCanvas = () => {
         })
         mainScene.addChild(groundSprite);
 
-
+        const camera = new Camera();
+        mainScene.addChild(camera);
 
         const hero = new Hero(grindCells(6), grindCells(5));
         mainScene.addChild(hero);
@@ -50,6 +52,10 @@ const GameCanvas = () => {
         }
 
         const draw = () => {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // save current state for camera effect
+            ctx.save();
             mainScene.draw(ctx, 0, 0);
         }
 
