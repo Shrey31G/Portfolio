@@ -8,6 +8,7 @@ import { grindCells, isSpaceFree } from "./helpers/Grid.js";
 import { moveTowards } from "./helpers/moveTowards.js";
 import { GameObject } from "./GameObject.js";
 import { Hero } from "./objects/Hero/hero.js";
+import { events } from "./Events.js";
 
 const GameCanvas = () => {
     const canvasRef = useRef(null);
@@ -37,6 +38,9 @@ const GameCanvas = () => {
         const hero = new Hero(grindCells(6), grindCells(5));
         mainScene.addChild(hero);
 
+        events.on("HERO_POSITION", mainScene, heroPosition => {
+            console.log("HEROMOVED", heroPosition);
+        })
 
         mainScene.input = new Input();
 
