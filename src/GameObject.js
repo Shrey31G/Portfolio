@@ -7,10 +7,10 @@ export class GameObject {
     this.parent = null;
   }
   stepEntry(delta, root) {
-    //call updates on all children first
+
     this.children.forEach((child) => child.stepEntry(delta, root));
 
-    //call any implemented step code
+
     this.step(delta, root);
   }
 
@@ -21,10 +21,9 @@ export class GameObject {
     const drawPosX = x + this.position.x;
     const drawPosY = y + this.position.y;
 
-    // do the rendering for Images
+
     this.drawImage(ctx, drawPosX, drawPosY);
 
-    // pass on to children
     this.children.forEach((child) => child.draw(ctx, drawPosX, drawPosY));
   }
 

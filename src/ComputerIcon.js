@@ -48,7 +48,7 @@ export class ComputerIcon extends GameObject {
       }
     });
 
-    events.off("INTERACTION_KEY_PRESSED", this, () => {
+    events.on("INTERACTION_KEY_PRESSED", this, () => {
       if (this.isOverLapping) {
         if (this.isMenuOpen) {
           this.closeMenu();

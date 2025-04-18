@@ -26,29 +26,36 @@ export class PortfolioMenu extends GameObject {
     this.addMenuItem("Projects", 2, () => window.open("/projects", "_blank"));
     this.addMenuItem("Resume", 3, () => window.open("/resume", "_blank"));
 
-    // Update the selected item
     this.updateSelectedItem();
 
-    // Listen for keyboard navigation
-    events.on("KEY_PRESSED", this, (keyCode) => {
+    setTimeout(() => {
+      this.setupKeyControls();
+    }, 200);
+  }
+
+  setupKeyControls() {
+    this.keyPressHandler = (keyCode) => {
       // Navigate up
       if (keyCode === "ArrowUp" || keyCode === "KeyW") {
         this.selectedIndex = Math.max(0, this.selectedIndex - 1);
         this.updateSelectedItem();
-      }
-      // Navigate down
-      else if (keyCode === "ArrowDown" || keyCode === "KeyS") {
+      } else if (keyCode === "ArrowDown" || keyCode === "KeyS") {
         this.selectedIndex = Math.min(
           this.menuItems.length - 1,
           this.selectedIndex + 1
         );
         this.updateSelectedItem();
-      }
-      // Select item
-      else if (keyCode === "Enter" || keyCode === "Space") {
+      } else if (keyCode === "Enter" || keyCode === "Space") {
         this.menuItems[this.selectedIndex].onClick();
       }
-    });
+    };
+
+    events.on("KEY_PRESSED", this, this.keyPressHandler);
+  }
+
+  destroy() {
+    events.unsubscribe(this);
+    super.destroy();
   }
 
   updateSelectedItem() {
@@ -65,7 +72,6 @@ export class PortfolioMenu extends GameObject {
       ctx.fillStyle = "rgba(255, 255, 255, 0.9)";
       ctx.strokeStyle = "#000";
       ctx.lineWidth = 2;
-
 
       const width = 150;
       const height = 120;

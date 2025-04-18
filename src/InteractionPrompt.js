@@ -4,7 +4,7 @@ import { Vector2 } from "./vector2";
 export class InteractionPrompt extends GameObject {
   constructor() {
     super({
-      position: new Vector2(2, -30),
+      position: new Vector2(-27, -30),
     });
     this.opacity = 0;
     this.targetOpacity = 1;
@@ -30,17 +30,14 @@ export class InteractionPrompt extends GameObject {
     ctx.save();
     ctx.globalAlpha = this.opacity;
 
-    //draw a speech bubble
-
     ctx.fillStyle = "rgba(255,255,255,0.9)";
     ctx.strokeStyle = "#000";
     ctx.lineWidth = 1;
 
-    const width = 100;
-    const height = 24;
+    const width = 70;
+    const height = 20;
     const radius = 5;
 
-    // Rounded rectangle
     ctx.beginPath();
     ctx.moveTo(x + radius, y);
     ctx.lineTo(x + width - radius, y);
@@ -56,7 +53,6 @@ export class InteractionPrompt extends GameObject {
     ctx.fill();
     ctx.stroke();
 
-    // Add a little triangle pointing down
     ctx.beginPath();
     ctx.moveTo(x + width / 2 - 5, y + height);
     ctx.lineTo(x + width / 2, y + height + 5);
@@ -64,7 +60,6 @@ export class InteractionPrompt extends GameObject {
     ctx.fill();
     ctx.stroke();
 
-    // Text
     ctx.fillStyle = "#000";
     ctx.font = "10px Arial";
     ctx.textAlign = "center";
