@@ -18,6 +18,7 @@ import {
   STAND_UP,
   STAND_LEFT,
   STAND_RIGHT,
+  PICK_UP_DOWN,
 } from "./heroAnimations";
 
 export class Hero extends GameObject {
@@ -47,14 +48,35 @@ export class Hero extends GameObject {
         standUp: new FrameIndexPattern(STAND_UP),
         standLeft: new FrameIndexPattern(STAND_LEFT),
         standRight: new FrameIndexPattern(STAND_RIGHT),
+        pickUpDown: new FrameIndexPattern(PICK_UP_DOWN),
       }),
     });
     this.addChild(this.body);
     this.facingDirection = DOWN;
     this.destinationPosition = this.position.duplicate();
+    this.itemPickUpTime = 0;
+    this.itemPickUpShell = null;
+    this.isPaused = false;
+
+    events.on("PAUSE_HERO_MOVEMENT", this, () => {
+      this.isPaused = true;
+    });
+
+    events.on("RESUME_HERO_MOVEMENT", this, () => {
+      this.isPaused = false;
+    });
   }
 
   step(delta, root) {
+    if (this.isPaused) {
+      return; // Skip movement if paused
+    }
+    
+    if (this.itemPickUpTime > 0) {
+      this.workOnItemPickeup(delta);
+      return;
+    }
+
     const distance = moveTowards(this, this.destinationPosition, 1);
 
     const hasArrived = distance <= 1;
@@ -66,8 +88,8 @@ export class Hero extends GameObject {
   }
 
   tryEmitPosition() {
-    if(this.lastX === this.position.x & this.lastY === this.position.y) {
-        return;
+    if ((this.lastX === this.position.x) & (this.lastY === this.position.y)) {
+      return;
     }
     this.lastX = this.position.x;
     this.lastY = this.position.y;

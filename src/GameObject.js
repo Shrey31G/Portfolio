@@ -1,8 +1,10 @@
+import { events } from "./Events";
 import { Vector2 } from "./vector2";
 export class GameObject {
   constructor({ position }) {
     this.position = position ?? new Vector2(0, 0);
     this.children = [];
+    this.parent = null;
   }
   stepEntry(delta, root) {
     //call updates on all children first
@@ -26,17 +28,26 @@ export class GameObject {
     this.children.forEach((child) => child.draw(ctx, drawPosX, drawPosY));
   }
 
-  drawImage(ctx, drawPosX, drawPosY) {
+  drawImage(ctx, drawPosX, drawPosY) {}
 
+  destroy() {
+    this.children.forEach((child) => {
+      child.destroy();
+    });
+    if (this.parent) {
+      this.parent.removeChild(this);
+    }
   }
 
   addChild(gameObject) {
+    gameObject.parent = this;
     this.children.push(gameObject);
   }
 
-  removeChid(gameObject){
-    this.children = this.children.filter(g => {
-        return gameObject !== g;
-    })
+  removeChild(gameObject) {
+    events.unsubscribe(gameObject);
+    this.children = this.children.filter((g) => {
+      return gameObject !== g;
+    });
   }
 }
