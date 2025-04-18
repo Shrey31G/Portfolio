@@ -12,7 +12,6 @@ import { events } from "./Events.js";
 import { Camera } from "./Camera.js";
 import { ComputerIcon } from "./ComputerIcon.js";
 
-
 const GameCanvas = () => {
     const canvasRef = useRef(null);
 
@@ -41,7 +40,6 @@ const GameCanvas = () => {
         const hero = new Hero(grindCells(6), grindCells(5));
         mainScene.addChild(hero);
 
-
         events.on("HERO_POSITION", mainScene, heroPosition => {
             console.log("HEROMOVED", heroPosition);
         })
@@ -49,28 +47,22 @@ const GameCanvas = () => {
         const computer = new ComputerIcon(grindCells(10), grindCells(6));
         mainScene.addChild(computer);
 
-
-
-        // Add event listeners for interaction
+        // Add event listeners for keyboard interaction only
         const handleKeyDown = (e) => {
             if (e.code === "Space" || e.code === "Enter") {
                 events.emit("INTERACTION_KEY_PRESSED");
             }
-
-            events.emit("KEY_PRESED", e.code);
+            
+            // Emit KEY_PRESSED for menu navigation
+            events.emit("KEY_PRESSED", e.code);
         };
+
+        // Only add keyboard event listener
         window.addEventListener("keydown", handleKeyDown);
-
-
-        window.addEventListener("keydown", handleKeyDown);
-        canvas.addEventListener("mousemove", handleMouseMove);
-        canvas.addEventListener("click", handleMouseClick);
-
 
         mainScene.input = new Input();
 
         const update = (delta) => {
-
             mainScene.stepEntry(delta, mainScene);
         }
 
@@ -78,23 +70,22 @@ const GameCanvas = () => {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             skySprite.drawImage(ctx, 0, 0);
-
+            // save current state for camera effect
             ctx.save();
 
             ctx.translate(camera.position.x, camera.position.y);
             mainScene.draw(ctx, 0, 0);
 
+            // restore to original state
             ctx.restore();
         }
 
         const gameLoop = new GameLoop(update, draw);
         gameLoop.start();
-
+        
         return () => {
             window.removeEventListener("keydown", handleKeyDown);
-            canvas.removeEventListener("mousemove", handleMouseMove);
-            canvas.removeEventListener("click", handleMouseClick);
-          };
+        };
     }, []);
 
     return (
