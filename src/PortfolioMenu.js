@@ -52,7 +52,6 @@ export class PortfolioMenu extends GameObject {
   }
 
   updateSelectedItem() {
-    // Update all menu items
     this.menuItems.forEach((item, index) => {
       item.setSelected(index === this.selectedIndex);
     });
@@ -67,7 +66,7 @@ export class PortfolioMenu extends GameObject {
       ctx.strokeStyle = "#000";
       ctx.lineWidth = 2;
 
-      // Draw scroll with rounded corners
+
       const width = 150;
       const height = 120;
       const radius = 10;
@@ -92,7 +91,6 @@ export class PortfolioMenu extends GameObject {
       ctx.fill();
       ctx.stroke();
 
-      // Draw a decorative line for scroll effect
       ctx.beginPath();
       ctx.moveTo(x + 10, y + 10);
       ctx.lineTo(x + width - 10, y + 10);
