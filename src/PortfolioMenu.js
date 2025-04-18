@@ -11,6 +11,9 @@ export class PortfolioMenu extends GameObject {
 
     this.createScrollBackground();
 
+    this.menuItems = [];
+    this.selectedIndex = 0;
+
     this.addMenuItem("GitHub", 0, () =>
       window.open("https://github.com/Shrey31G", "_blank")
     );
@@ -23,8 +26,35 @@ export class PortfolioMenu extends GameObject {
     this.addMenuItem("Projects", 2, () => window.open("/projects", "_blank"));
     this.addMenuItem("Resume", 3, () => window.open("/resume", "_blank"));
 
-    events.on("MENU_ITEM_CLICKED", this, (index) => {
-      this.menuItems[index].onClick();
+    // Update the selected item
+    this.updateSelectedItem();
+
+    // Listen for keyboard navigation
+    events.on("KEY_PRESSED", this, (keyCode) => {
+      // Navigate up
+      if (keyCode === "ArrowUp" || keyCode === "KeyW") {
+        this.selectedIndex = Math.max(0, this.selectedIndex - 1);
+        this.updateSelectedItem();
+      }
+      // Navigate down
+      else if (keyCode === "ArrowDown" || keyCode === "KeyS") {
+        this.selectedIndex = Math.min(
+          this.menuItems.length - 1,
+          this.selectedIndex + 1
+        );
+        this.updateSelectedItem();
+      }
+      // Select item
+      else if (keyCode === "Enter" || keyCode === "Space") {
+        this.menuItems[this.selectedIndex].onClick();
+      }
+    });
+  }
+
+  updateSelectedItem() {
+    // Update all menu items
+    this.menuItems.forEach((item, index) => {
+      item.setSelected(index === this.selectedIndex);
     });
   }
 
@@ -72,10 +102,8 @@ export class PortfolioMenu extends GameObject {
     };
     this.addChild(this.background);
   }
+
   addMenuItem(text, index, onClick) {
-    if (!this.menuItems) {
-      this.menuItems = [];
-    }
     const menuItem = new MenuItem(text, index, onClick);
     this.menuItems.push(menuItem);
     this.addChild(menuItem);
