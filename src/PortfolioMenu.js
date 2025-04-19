@@ -14,28 +14,43 @@ export class PortfolioMenu extends GameObject {
     this.menuItems = [];
     this.selectedIndex = 0;
 
-    this.addMenuItem("GitHub", 0, () =>
-      window.open("https://github.com/Shrey31G", "_blank")
-    );
-    this.addMenuItem("LinkedIn", 1, () =>
+    this.addMenuItem("GitHub", 0, () => {
+      console.log("Opening GitHub");
+      window.open("https://github.com/Shrey31G", "_blank");
+    });
+
+    this.addMenuItem("LinkedIn", 1, () => {
+      console.log("Opening LinkedIn");
       window.open(
         "https://www.linkedin.com/in/shrey-gangwar-712233225/",
         "_blank"
-      )
-    );
-    this.addMenuItem("Projects", 2, () => window.open("/projects", "_blank"));
-    this.addMenuItem("Resume", 3, () => window.open("/resume", "_blank"));
+      );
+    });
+
+    this.addMenuItem("Projects", 2, () => {
+      console.log("Opening Projects");
+      window.open("/projects", "_blank");
+    });
+
+    this.addMenuItem("Resume", 3, () => {
+      console.log("Opening Resume");
+      window.open("/resume", "_blank");
+    });
 
     this.updateSelectedItem();
-
-    setTimeout(() => {
-      this.setupKeyControls();
-    }, 200);
+    this.setupKeyControls();
   }
 
   setupKeyControls() {
+    this.inputCooldown = true;
+
+    setTimeout(() => {
+      this.inputCooldown = false;
+    }, 200); 
+
     this.keyPressHandler = (keyCode) => {
-      // Navigate up
+      if (this.inputCooldown) return;
+
       if (keyCode === "ArrowUp" || keyCode === "KeyW") {
         this.selectedIndex = Math.max(0, this.selectedIndex - 1);
         this.updateSelectedItem();
@@ -46,7 +61,13 @@ export class PortfolioMenu extends GameObject {
         );
         this.updateSelectedItem();
       } else if (keyCode === "Enter" || keyCode === "Space") {
-        this.menuItems[this.selectedIndex].onClick();
+        const selectedAction = this.menuItems[this.selectedIndex].onClick;
+
+
+        setTimeout(() => {
+          selectedAction();
+          events.emit("CLOSE_MENU")
+        }, 50);
       }
     };
 

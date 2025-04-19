@@ -49,12 +49,14 @@ export class ComputerIcon extends GameObject {
     });
 
     events.on("INTERACTION_KEY_PRESSED", this, () => {
-      if (this.isOverLapping) {
-        if (this.isMenuOpen) {
-          this.closeMenu();
-        } else {
-          this.openMenu();
-        }
+      if (this.isOverLapping && !this.isMenuOpen) {
+        this.openMenu();
+      }
+    });
+
+    events.on("CLOSE_MENU", this, () => {
+      if (this.isMenuOpen) {
+        this.closeMenu();
       }
     });
   }
@@ -77,14 +79,14 @@ export class ComputerIcon extends GameObject {
 
     events.emit("PAUSE_HERO_MOVEMENT");
   }
-  
+
   closeMenu() {
     this.isMenuOpen = false;
     console.log("Closing menu");
 
-    if(this.portfolioMenu) {
-        this.portfolioMenu.destroy();
-        this.portfolioMenu = null;
+    if (this.portfolioMenu) {
+      this.portfolioMenu.destroy();
+      this.portfolioMenu = null;
     }
     events.emit("RESUME_HERO_MOVEMENT");
   }

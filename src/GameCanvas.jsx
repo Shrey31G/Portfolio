@@ -5,7 +5,6 @@ import { Vector2 } from "./vector2.js";
 import { GameLoop } from "./GameLoop.js";
 import { DOWN, Input, LEFT, RIGHT, UP } from "./Input.js";
 import { grindCells, isSpaceFree } from "./helpers/Grid.js";
-import { moveTowards } from "./helpers/moveTowards.js";
 import { GameObject } from "./GameObject.js";
 import { Hero } from "./objects/Hero/hero.js";
 import { events } from "./Events.js";
