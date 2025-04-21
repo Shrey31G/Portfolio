@@ -12,7 +12,9 @@ export const Home = () => {
                         Choose One
                     </h1>
                     <div className="flex gap-6">
-                        <Link to="/basic">Basic Resume</Link>
+                        <Link to="/basic"
+                        className=""
+                        >Basic Resume</Link>
                         <Link to="/2d">2d-Game Resume(web only)</Link>
                     </div>
                     <div className="mt-5">
