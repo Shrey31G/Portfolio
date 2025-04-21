@@ -2,7 +2,7 @@
 export const BasicResume = () => {
     return (
         <div>
-            hey
+            Shrey Gangwar
         </div>
     )
 }
