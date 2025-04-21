@@ -48,6 +48,7 @@ const GameCanvas = () => {
 
 
         const handleKeyDown = (e) => {
+            if(e.repeat) return;
             if ((e.code === "Space" || e.code === "Enter") && !interactionCooldownRef.current) {
                 interactionCooldownRef.current = true;
 

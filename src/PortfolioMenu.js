@@ -42,12 +42,10 @@ export class PortfolioMenu extends GameObject {
   }
 
   setupKeyControls() {
-    this.inputCooldown = true;
+    console.log("input cool dowin making false");
+    this.inputCooldown = false;
 
-    setTimeout(() => {
-      this.inputCooldown = false;
-    }, 200); 
-
+    console.log("false krdiya");
     this.keyPressHandler = (keyCode) => {
       if (this.inputCooldown) return;
 
@@ -63,10 +61,9 @@ export class PortfolioMenu extends GameObject {
       } else if (keyCode === "Enter" || keyCode === "Space") {
         const selectedAction = this.menuItems[this.selectedIndex].onClick;
 
-
         setTimeout(() => {
           selectedAction();
-          events.emit("CLOSE_MENU")
+          events.emit("CLOSE_MENU");
         }, 50);
       }
     };

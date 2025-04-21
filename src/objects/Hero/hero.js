@@ -71,7 +71,7 @@ export class Hero extends GameObject {
     if (this.isPaused) {
       return; // Skip movement if paused
     }
-    
+
     if (this.itemPickUpTime > 0) {
       this.workOnItemPickeup(delta);
       return;
