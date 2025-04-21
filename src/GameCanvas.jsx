@@ -48,18 +48,21 @@ const GameCanvas = () => {
 
 
         const handleKeyDown = (e) => {
-            if(e.repeat) return;
+            if (e.repeat) return;
             if ((e.code === "Space" || e.code === "Enter") && !interactionCooldownRef.current) {
-                interactionCooldownRef.current = true;
 
+                interactionCooldownRef.current = true;
+                console.log(`Before interaction key: ${e.code}`)
 
                 events.emit("INTERACTION_KEY_PRESSED");
 
+                console.log(`After interaction key: ${e.code}`)
+                
                 setTimeout(() => {
                     interactionCooldownRef.current = false;
-                }, 300);
+                }, 500); 
             }
-
+        
             events.emit("KEY_PRESSED", e.code);
         };
 

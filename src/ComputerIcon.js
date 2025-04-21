@@ -49,6 +49,7 @@ export class ComputerIcon extends GameObject {
     });
 
     events.on("INTERACTION_KEY_PRESSED", this, () => {
+      console.log("INTERACTION_KEY_PRESSED handler called in ComputerIcon");
       if (this.isOverLapping && !this.isMenuOpen) {
         this.openMenu();
       }
@@ -72,12 +73,18 @@ export class ComputerIcon extends GameObject {
   }
 
   openMenu() {
+    if(this.isMenuOpen) {
+      console.log("Menu already open, ignoring duplicate open request");
+      return;
+    }
     this.isMenuOpen = true;
     console.log("opening Menu");
     this.portfolioMenu = new PortfolioMenu();
+    console.log("after portfolio menu made")
     this.addChild(this.portfolioMenu);
-
+    console.log("after adding child in portfolio but before stopping movement")
     events.emit("PAUSE_HERO_MOVEMENT");
+    console.log("after pausing movement xd")
   }
 
   closeMenu() {

@@ -42,8 +42,10 @@ export class PortfolioMenu extends GameObject {
   }
 
   setupKeyControls() {
-    console.log("input cool dowin making false");
-    this.inputCooldown = false;
+    this.inputCooldown = true;
+    setTimeout(() => {
+      this.inputCooldown = false;
+    }, 200);
 
     console.log("false krdiya");
     this.keyPressHandler = (keyCode) => {
