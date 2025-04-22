@@ -1,5 +1,8 @@
 
+import { motion } from "framer-motion";
 import { useDarkMode } from "../context/ThemeContext"
+import { renderToPipeableStream } from "react-dom/server";
+import { TypingEffect } from "../components/TypingEffect";
 
 export const BasicResume = () => {
     const { darkMode, setDarkMode } = useDarkMode();
@@ -88,7 +91,11 @@ export const BasicResume = () => {
                 </div>
             </div>
 
-            <div id="Projects" className="grid grid-cols-1 max-w-3xl mx-auto my-32 w-[85%] md:w-[70%]  bg-white  dark:bg-black ">
+            <div className="w-full overflow-hidden my-10 bg-white dark:bg-black flex justify-center">
+            <TypingEffect texts={["Innovate", "Code", "Repeat"]} />
+            </div>
+
+            <div id="Projects" className="grid grid-cols-1 max-w-3xl mx-auto my-32 w-[85%] md:w-[70%] gap-1 bg-white  dark:bg-black ">
                 <div>
                     <h2 className="text-2xl text-primary font-bold uppercase">
                         Projects
