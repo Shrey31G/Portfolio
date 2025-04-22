@@ -1,14 +1,15 @@
-import { ThemeProvider, useDarkMode } from "../context/ThemeContext"
+
+import { useDarkMode } from "../context/ThemeContext"
 
 export const BasicResume = () => {
     const { darkMode, setDarkMode } = useDarkMode();
     return (
-        <>
 
-            <div className="flex flex-col bg-white h-screen w-screen dark:bg-black dark:text-white">
-                <div className="flex h-2/3  items-center justify-center">
-                    <div className="flex flex-col bg-white dark:bg-black h-1/2 w-[80%] md:w-[60%]">
-                        <div className="flex-col mt-6">
+
+            <div className="flex flex-col bg-white w-screen dark:bg-black dark:text-white overflow-y-auto">
+                <div className="grid grid-cols-1 gap-6 max-w-3xl mx-auto my-32  w-[80%] md:w-[50%]">
+                    <div className="flex flex-col bg-white dark:bg-black h-1/2 ">
+                        <div className="flex-col ">
                             <div className="flex justify-between">
                                 <div className="text-3xl font-mono ">
                                     Hi,I'm Shrey
@@ -17,7 +18,7 @@ export const BasicResume = () => {
                                     <div className="flex gap-2">
                                         <a target="_blank" href="https://x.com/Shrey31G" className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:bg-accent hover:text-accent-foreground h-10 w-10 rounded-full relative transition-all duration-300">
                                             <
-                                                svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 scale-90" fill="none" viewBox="0 0 1200 1220"><path fill="currentColor" d="M714.163 519.284 1160.89 0h-105.86L667.137 450.887 357.328 0H0l468.492 681.821L0 1226.37h105.866l409.625-476.152 327.181 476.152H1200L714.137 519.284h.026ZM569.165 687.828l-47.468-67.894-377.686-540.24h162.604l304.797 435.991 47.468 67.894 396.2 566.721H892.476L569.165 687.854v-.026Z"></path></svg>
+                                                svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 scale-90" fill="none" viewBox="0 0 1200 1220"><path fill="currentColor" d="M714.163 519.284 1160.89 0h-105.86L667.137 450.887 357.328 0H0l468.492 681.821L0 1226.37h105.866l409.625-476.152 327.181 476.152H1200L714.137 519.284h.026ZM569.165 687.828l-47.468-67.894-377.686-540.24h162.604l304.797 435.991 47.468 67.894 396.2 566.721H892.476L569.165 687.854v-.026Z"></path></svg>
                                         </a>
 
                                         <a target="_blank" href="https://github.com/" className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:bg-accent hover:text-accent-foreground h-10 w-10 rounded-full relative transition-all duration-300">
@@ -83,16 +84,18 @@ export const BasicResume = () => {
                                 22, M | Kanpur, India | SWE
                             </h2>
                         </div>
-                        <div className="mt-6">
-                            I blend design and code to build awesome stuff on the web. My sweet spot is crafting slick frontends and designing intuitive user experiences.
-                        </div>
+                    </div>
+                    <div className="mt-6">
+                        I blend design and code to build awesome stuff on the web. My sweet spot is crafting slick frontends and designing intuitive user experiences.
                     </div>
                 </div>
-                <div>
 
+                
+                <div className="h-[100vh] text-white flex items-center justify-center bg-gray-800 dark:bg-gray-900 ">
+                    Hey shrey
                 </div>
             </div>
 
-        </>
+
     )
 }

@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom"
 import './App.css'
 import { DarkModeToggler } from "./components/DarkModeToggler"
-import { ThemeProvider } from "./context/ThemeContext"
 
 export const Home = () => {
     return (
@@ -22,8 +21,4 @@ export const Home = () => {
             </div>
         </>
     )
-}
-
-const linkStyle = {
-
 }
