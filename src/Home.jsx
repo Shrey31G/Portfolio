@@ -20,7 +20,6 @@ export const Home = () => {
                         </Link>
                     </div>
 
-
                     <div className="relative flex flex-col items-center">
                         <div className="absolute -inset-x-4 bottom-0 h-16 blur-xl bg-red-600/80 rounded-full z-0"></div>
                         <Link to="/2d"
