@@ -4,6 +4,7 @@ import { DarkModeToggler } from "./components/DarkModeToggler"
 import { SoloTyping } from "./components/SoloTyping"
 
 export const Home = () => {
+    console.log("bruh how many?")
     return (
         <>
             <div className="h-screen w-screen flex flex-col gap-2 justify-center items-center dark:bg-black dark:text-white">

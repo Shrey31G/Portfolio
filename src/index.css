@@ -4,10 +4,11 @@ html, body {
     overflow: hidden; 
     image-rendering: pixelated;
     box-sizing: border-box;
+
 }
 
 canvas {
     width: 100%;
-    background: blue;
+    background: rgb(135, 206, 250);
 }
 

@@ -1,7 +1,7 @@
 
 class Resources {
     constructor() {
-        // what we want to download
+        // what i will download
         this.toLoad = {
             sky: "/sprites/sky.png",
             ground: "/sprites/ground.png",

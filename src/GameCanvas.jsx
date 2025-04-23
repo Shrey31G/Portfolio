@@ -36,10 +36,10 @@ const GameCanvas = () => {
 
     const getMaxWidth = () => {
         const { width } = screenSize;
-        if (width >= 1920) return "1280px";       
-        if (width >= 1280) return "960px";        
-        if (width >= 768) return "720px";         
-        return "100%";                            
+        if (width >= 1920) return "1440px";
+        if (width >= 1280) return "1280px";
+        if (width >= 768) return "960px";
+        return "100%";
     };
 
     useEffect(() => {
@@ -54,10 +54,10 @@ const GameCanvas = () => {
 
             canvas.width = GAME_WIDTH;
             canvas.height = GAME_HEIGHT;
-            
+
             canvas.style.width = `${containerWidth}px`;
             canvas.style.height = `${containerHeight}px`;
-            
+
             ctx.imageSmoothingEnabled = false;
         }
 
@@ -131,7 +131,7 @@ const GameCanvas = () => {
 
         // Initial resize
         resizeCanvas();
-        
+
         const gameLoop = new GameLoop(update, draw);
         gameLoop.start();
 
@@ -139,30 +139,32 @@ const GameCanvas = () => {
             window.removeEventListener("keydown", handleKeyDown);
             window.removeEventListener("resize", resizeCanvas);
         };
-    }, [screenSize]);
+    }, [screenSize]); 
 
     return (
-        <div 
-            ref={containerRef} 
-            className="w-full mx-auto"
-            style={{ 
-                minHeight: "180px", 
-                minWidth: "320px",
-                aspectRatio: "16/9",
-                maxWidth: getMaxWidth(),
-                maxHeight: "calc(100vh - 48px)",
-                position: "relative"
-            }}
-        >
-            <canvas
-                ref={canvasRef}
+        <div className="h-screen w-screen bg-[#a7e6f3]">
+            <div
+                ref={containerRef}
+                className="w-full mx-auto"
                 style={{
-                    display: "block",
-                    width: "100%",
-                    height: "100%",
-                    imageRendering: "pixelated"
+                    minHeight: "180px",
+                    minWidth: "320px",
+                    aspectRatio: "16/9",
+                    maxWidth: getMaxWidth(),
+                    maxHeight: "calc(100vh - 48px)",
+                    position: "relative"
                 }}
-            />
+            >
+                <canvas
+                    ref={canvasRef}
+                    style={{
+                        display: "block",
+                        width: "100%",
+                        height: "100%",
+                        imageRendering: "pixelated"
+                    }}
+                />
+            </div>
         </div>
     );
 };
