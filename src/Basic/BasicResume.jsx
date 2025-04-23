@@ -95,7 +95,7 @@ export const BasicResume = () => {
             <TypingEffect texts={["Innovate", "Code", "Repeat"]} />
             </div>
 
-            <div id="Projects" className="grid grid-cols-1 max-w-3xl mx-auto my-32 w-[85%] md:w-[70%] gap-1 bg-white  dark:bg-black ">
+            <div id="Projects" className="grid grid-cols-1 max-w-3xl mx-auto my-32 w-[85%] md:w-[70%] gap-2 bg-white  dark:bg-black ">
                 <div>
                     <h2 className="text-2xl text-primary font-bold uppercase">
                         Projects
