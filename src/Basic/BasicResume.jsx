@@ -87,12 +87,12 @@ export const BasicResume = () => {
                     </div>
                 </div>
                 <div className="mt-6">
-                    I blend design and code to build awesome stuff on the web. My sweet spot is crafting slick frontends and designing intuitive user experiences.
+                    I like building things that look good and feel even better to use. Whether it's a tiny UI detail or a full-blown app, I’m always chasing that balance between design and function.
                 </div>
             </div>
 
             <div className="w-full overflow-hidden my-10 bg-white dark:bg-black flex justify-center">
-            <TypingEffect texts={["Innovate", "Code", "Repeat"]} />
+                <TypingEffect texts={["Innovate", "Code", "Repeat"]} />
             </div>
 
             <div id="Projects" className="grid grid-cols-1 max-w-3xl mx-auto my-32 w-[85%] md:w-[70%] gap-2 bg-white  dark:bg-black ">
