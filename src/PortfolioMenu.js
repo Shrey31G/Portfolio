@@ -16,25 +16,22 @@ export class PortfolioMenu extends GameObject {
 
     this.addMenuItem("GitHub", 0, () => {
       console.log("Opening GitHub");
-      window.open("https://github.com/Shrey31G", "_blank");
+      window.open(import.meta.env.VITE_GITHUB_URL, "_blank");
     });
 
     this.addMenuItem("LinkedIn", 1, () => {
       console.log("Opening LinkedIn");
-      window.open(
-        "https://www.linkedin.com/in/shrey-gangwar-712233225/",
-        "_blank"
-      );
+      window.open(import.meta.env.VITE_LINKEDIN_URL, "_blank");
     });
 
     this.addMenuItem("Projects", 2, () => {
       console.log("Opening Projects");
-      window.open("/projects", "_blank");
+      window.open(import.meta.env.VITE_PROJECT_URL, "_blank");
     });
 
     this.addMenuItem("Resume", 3, () => {
       console.log("Opening Resume");
-      window.open("/resume", "_blank");
+      window.open(import.meta.env.VITE_RESUME_URL, "_blank");
     });
 
     this.updateSelectedItem();
