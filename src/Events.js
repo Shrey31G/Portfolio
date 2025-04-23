@@ -45,9 +45,13 @@ class Events {
       (stored) => stored.caller !== caller
     );
     const afterCount = this.callbacks.length;
-    console.log(
-      `Unsubscribed caller: removed ${beforeCount - afterCount} subscriptions`
-    );
+
+    // Only log if subscriptions were actually removed
+    if (beforeCount !== afterCount) {
+      console.log(
+        `Unsubscribed caller: removed ${beforeCount - afterCount} subscriptions`
+      );
+    }
   }
 }
 
