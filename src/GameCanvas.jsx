@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { resources } from "./Resource.js"
 import { Sprite } from "./Sprite.js";
-import { Vector2 } from "./vector2.js";
+import { Vector2 } from "./Vector2.js";
 import { GameLoop } from "./GameLoop.js";
-import { DOWN, Input, LEFT, RIGHT, UP } from "./Input.js";
+import { Input } from "./Input.js";
 import { grindCells, isSpaceFree } from "./helpers/Grid.js";
 import { GameObject } from "./GameObject.js";
 import { Hero } from "./objects/Hero/hero.js";

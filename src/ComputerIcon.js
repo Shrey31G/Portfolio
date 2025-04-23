@@ -2,7 +2,7 @@ import { events } from "./Events";
 import { GameObject } from "./GameObject";
 import { resources } from "./Resource";
 import { Sprite } from "./Sprite";
-import { Vector2 } from "./vector2";
+import { Vector2 } from "./Vector2";
 import { PortfolioMenu } from "./PortfolioMenu";
 import { InteractionPrompt } from "./InteractionPrompt";
 

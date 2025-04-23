@@ -1,7 +1,7 @@
 import { events } from "./Events";
 import { GameObject } from "./GameObject";
 import { MenuItem } from "./MenuItem";
-import { Vector2 } from "./vector2";
+import { Vector2 } from "./Vector2";
 
 export class PortfolioMenu extends GameObject {
   constructor() {

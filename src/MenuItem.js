@@ -1,5 +1,5 @@
 import { GameObject } from "./GameObject";
-import { Vector2 } from "./vector2";
+import { Vector2 } from "./Vector2";
 
 export class MenuItem extends GameObject {
   constructor(text, index, onClick) {

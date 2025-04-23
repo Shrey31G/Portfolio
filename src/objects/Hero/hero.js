@@ -8,7 +8,7 @@ import { DOWN, LEFT, RIGHT, UP } from "../../Input";
 import { walls } from "../../levels/level1";
 import { resources } from "../../Resource";
 import { Sprite } from "../../Sprite";
-import { Vector2 } from "../../vector2";
+import { Vector2 } from "../../Vector2";
 import {
   WALK_DOWN,
   WALK_UP,
