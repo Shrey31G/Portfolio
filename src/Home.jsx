@@ -7,23 +7,21 @@ export const Home = () => {
     return (
         <>
             <div className="h-screen w-screen flex flex-col gap-2 justify-center items-center dark:bg-black dark:text-white">
-                <div className="my-10">
+                <div className="mb-20">
                     <SoloTyping text="CHOOSE ONE" />
                 </div>
                 <div className="flex gap-16">
 
-                    <div className="relative flex flex-col items-center">
-
-                        <div className="absolute -inset-x-4 bottom-0 h-16 blur-xl bg-blue-600/80 rounded-full z-0"></div>
-                        <Link to="/basic" className="relative z-10 px-6 py-2  font-semibold">
+                    <div className=" flex flex-col items-center">
+                        <Link to="/basic" className=" px-6 py-2  font-semibold text-2xl border-x-2 rounded-md">
                             Basic Resume
                         </Link>
                     </div>
 
-                    <div className="relative flex flex-col items-center">
-                        <div className="absolute -inset-x-4 bottom-0 h-16 blur-xl bg-red-600/80 rounded-full z-0"></div>
+                    <div className=" flex flex-col items-center">
+
                         <Link to="/2d"
-                            className="relative z-10 px-6 py-2 font-semibold">
+                            className="px-6 py-2 font-semibold text-2xl border-x-2 rounded-md">
                             2d-Game Resume(web only)
                         </Link>
                     </div>
