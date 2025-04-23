@@ -46,7 +46,7 @@ const mapHeight = 80;
 const xOffsetTop = 112;
 const xOffsetBottom = 48;
 
-const yOffsetLeft = 48;
+const yOffset = 48;
 
 for(let x = 0; x < mapWidth; x += tileSize) {
     walls.add(`${x + xOffsetTop},16`);
